@@ -1,0 +1,191 @@
+<div *ngIf="idEditing == null || idEditing == undefined">
+  <div class="row">
+      
+        <h1 class="font-rubik color-darkgray font-bold italic"><i class="fa fa-address-book color-mainblue"></i>  Profile Information </h1>
+      
+    </div>
+
+  
+
+  <div class="row">
+        <div class="col-md-4">
+            <label class="label-auth-content">Profile Picture</label>
+            <div class="fileinputs">
+                <input type="file" class="file" (change)="fileEvent($event)" />
+                <div class="file-input-mask">
+                  <input />
+                  <i class="fa fa-search" ></i>
+                </div>
+              </div>
+            <img id='img-upload' class="profile-picture" src={{userProfile.Picture}} onerror="this.src='../../../assets/images/NoImage.png'"/> <!--"../../../assets/img/a1.jpg"-->
+        </div>  
+              
+    
+        <div class="col-md-6">
+            <div >            
+                <label  class="label-auth-content">User Name</label>
+              </div>
+          <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="userProfile.CognitoId" #FirstName="ngModel" required placeholder="User Name" readonly>            
+          </div>
+          <div >            
+              <label  class="label-auth-content">BirthDate</label>
+            </div>
+          <div class="form-group">
+            <input data-provide="datepicker" type="text" class="form-control" [(ngModel)]="userProfile.BirthDate" #BirthDate="ngModel" required placeholder="BirthDate" readonly>        
+          </div>
+          <div >            
+              <label  class="label-auth-content">First Name</label>
+            </div>
+          <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="userProfile.FirstName" #FirstName="ngModel" required placeholder="First name">
+            <div *ngIf="submitted && !FirstName.valid" class="help-block">Please let me know your first name</div>
+          </div>
+          <div >            
+              <label  class="label-auth-content">Last Name</label>
+            </div>
+          <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="userProfile.LastName" #LastName="ngModel" required placeholder="Last name">
+            <div *ngIf="submitted && !LastName.valid" class="help-block">Please let me know your last name</div>
+          </div>
+          <div >            
+              <label  class="label-auth-content">Nick Name</label>
+            </div>
+          <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="userProfile.Alias" #Alias="ngModel" required placeholder="Nickname">
+            <div *ngIf="submitted && !Alias.valid" class="help-block">Please let me know your nickname </div>
+          </div>              
+
+          <div >            
+              <label  class="label-auth-content">Skill Level</label>
+            </div>
+          <div class="form-group">
+            <select class="form-control" [(ngModel)]="selectedSkillLevelId" >
+                <option class="form-control" *ngFor="let level of skillLevelList" [value]="level.SkillLevelId">{{level.Name}}</option>      
+            </select>
+          </div>
+
+          <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" [(ngModel)]="isCoach">
+              <label  class="label-auth-content">Coach</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" [(ngModel)]="isPlayer">
+              <label  class="label-auth-content">Player</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" [(ngModel)]="isParent">
+              <label class="label-auth-content">Parent</label>
+            </div>
+            <div><br /></div>
+            <div class="col-md-6" >
+                <button class="btn btn-lg btn-primary btn-block bgcolor-blue2" type="submit" (click)="updateProfile()" [disabled]="(userProfile.FirstName.trim().length == 0) || (userProfile.LastName.trim().length == 0) || (userProfile.Alias.trim().length == 0) || (!isCoach && !isParent && !isPlayer) || (selectedSkillLevelId == -1)">Submit</button>
+            </div>
+          
+        </div> 
+        
+        
+        
+    
+        <br />
+        <div class="alert alert-danger" [hidden]="this.errorMessage == ''">
+          Error found: {{this.errorMessage}}
+        </div>
+        
+      <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+      
+    </div>
+
+</div>
+
+<div *ngIf="idEditing != null || idEditing != undefined" class="modal-body modal-lg" >    
+    <div class="form-row" >
+          <div class="col-md-6">
+              <label >Profile Picture</label>
+              <div class="fileinputs">
+                  <input type="file" class="file" (change)="fileEvent($event)" />
+                  <div class="file-input-mask">
+                    <input />
+                    <i class="fa fa-search" ></i>
+                  </div>
+                </div>
+              <img id='img-upload' class="profile-picture" src={{userProfile.Picture}} onerror="this.src='../../../assets/images/NoImage.png'"/>
+          </div>  
+                
+      
+          <div class="col-md-6">
+              <div >            
+                  <label >User Name</label>
+                </div>
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="userProfile.UserName" #UserName="ngModel" required placeholder="User Name" readonly>            
+            </div>
+            <div >            
+                <label  >BirthDate</label>
+              </div>
+            <div class="form-group">
+              <input data-provide="datepicker" type="text" class="form-control" [(ngModel)]="userProfile.BirthDate" #BirthDate="ngModel" required placeholder="BirthDate" readonly>        
+            </div>
+            <div >            
+                <label  >First Name</label>
+              </div>
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="userProfile.FirstName" #FirstName="ngModel" required placeholder="First name">
+              <div *ngIf="submitted && !FirstName.valid" class="help-block">Please let me know your first name</div>
+            </div>
+            <div >            
+                <label  >Last Name</label>
+              </div>
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="userProfile.LastName" #LastName="ngModel" required placeholder="Last name">
+              <div *ngIf="submitted && !LastName.valid" class="help-block">Please let me know your last name</div>
+            </div>
+            <div >            
+                <label  >Nick Name</label>
+              </div>
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="userProfile.Alias" #Alias="ngModel" required placeholder="Nickname">
+              <div *ngIf="submitted && !Alias.valid" class="help-block">Please let me know your nickname </div>
+            </div>              
+  
+            <div >            
+                <label  >Skill Level</label>
+              </div>
+            <div class="form-group">
+              <select class="form-control" [(ngModel)]="selectedSkillLevelId" >
+                  <option class="form-control" *ngFor="let level of skillLevelList" [value]="level.SkillLevelId">{{level.Name}}</option>      
+              </select>
+            </div>
+  
+            <div class="form-check form-check-inline" *ngIf="isOwner">
+                <input class="form-check-input" type="checkbox" [(ngModel)]="isCoach">
+                <label  >Coach</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" [(ngModel)]="isPlayer">
+                <label  >Player</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" [(ngModel)]="isParent">
+                <label >Parent</label>
+              </div>
+              <div><br /></div>
+              <div class="col-md-8" *ngIf="loggedUser.isParent">
+                  <button class="btn btn-lg btn-primary btn-block bgcolor-blue2" type="submit" (click)="updateProfile()" [disabled]="(userProfile.FirstName.trim().length == 0) || (userProfile.LastName.trim().length == 0) || (userProfile.Alias.trim().length == 0) || (!isCoach && !isParent && !isPlayer) || (selectedSkillLevelId == -1)">Submit</button>
+              </div>
+            
+          </div> 
+          
+          
+          
+      
+          <br />
+          <div class="alert alert-danger" [hidden]="this.errorMessage == ''">
+            Error found: {{this.errorMessage}}
+          </div>
+          
+        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        
+      </div>
+  
+  </div>

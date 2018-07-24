@@ -1,0 +1,64 @@
+{
+  "name": "mad-skills-app",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "react-native-scripts": "1.14.0",
+    "jest-expo": "~27.0.0",
+    "react-test-renderer": "16.3.1",
+    "babel-jest": "20.0.3",
+    "babel-preset-react-native": "2.1.0",
+    "eslint": "^4.4.1",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.2.0",
+    "flow-bin": "^0.52.0",
+    "jest": "20.0.4"
+  },
+  "rnpm": {
+    "assets": [
+      "assets",
+      "assets/fonts/Cabin",
+      "assets/fonts/Fira_Sans",
+      "assets/fonts/Libre_Franklin",
+      "assets/fonts/Rubik",
+      "assets/fonts/Source_Sans_Pro",
+      "./node_modules/@expo/vector-icons/fonts"
+    ]
+  },
+  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
+  "scripts": {
+    "devtools": "react-devtools",
+    "start": "react-native start",
+    "flow": "flow",
+    "eject": "react-native-scripts eject",
+    "android": "react-native-scripts android",
+    "ios": "react-native-scripts ios",
+    "test": "node node_modules/jest/bin/jest.js --watch"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "dependencies": {
+    "@expo/vector-icons": "^6.3.1",
+    "aws-sdk": "^2.274.1",
+    "babel-preset-es2015": "^6.24.1",
+    "buffer": "^5.1.0",
+    "expo": "^27.0.1",
+    "mime-type": "^3.0.5",
+    "path": "^0.12.7",
+    "prop-types": "^15.6.2",
+    "react": "16.3.1",
+    "react-devtools": "^3.2.3",
+    "react-native": "~0.55.2",
+    "react-native-action-button": "^2.8.4",
+    "react-native-elements": "^0.19.1",
+    "react-native-fetch-blob": "^0.10.8",
+    "react-native-material-ui": "^1.30.1",
+    "react-native-prompt": "^1.0.0",
+    "react-native-uuid": "^1.4.9",
+    "react-native-vector-icons": "^4.6.0",
+    "react-navigation": "^2.6.2"
+  }
+}

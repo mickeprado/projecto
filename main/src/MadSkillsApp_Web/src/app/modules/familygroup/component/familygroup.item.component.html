@@ -1,0 +1,38 @@
+<div class="card" style="width: 18rem;">
+  <div class="card-header bgcolor-mainblue profile-card-title">
+    <div class="row">
+      <div div class="col-xs-12 col-md-10"> {{userProfile.FirstName}}&nbsp;{{userProfile.LastName}}</div>
+      <div div class="col-xs-6 col-md-2" ><i class="fa fa-edit" (click)="showEditModal(userProfile)" ></i></div>
+    </div>
+      
+    </div>
+  <div class="card-body font-fira">
+      <div class="row">
+        <div class="col-md-4">          
+            <img id='img-upload' class="profile-picture-small" src={{userProfile.Picture}} onerror="this.src='../../../assets/images/NoImage.png'"/>
+        </div>  
+        &nbsp;&nbsp;
+        <div class="col-md-6">          
+            <div><label class="label-auth-content">{{userProfile.Alias}}</label>                   </div>
+
+            <div><label class="label-auth-content">{{userProfile.BirthDate  | date:'yyyy-MM-dd'}}</label></div>
+            <div></div>
+        </div>  
+      </div>
+  </div>
+  <div class="card-footer">
+        
+      </div>  
+</div>
+<div><br></div>
+
+<!-- Edit -->
+<ng-template #editRowModal >    
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Edit Family Member</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="this.editModalDialog.hide()">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <profile idEditing={{selectedRow.AppUserId}} groupOwner={{selectedRow.GroupOwner}} [refreshCallback]="refreshCallback" [modalDialog]="editModalDialog"></profile>    
+</ng-template>

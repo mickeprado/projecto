@@ -1,0 +1,34 @@
+<div class="row">
+  
+    <h1 class="font-rubik color-darkgray font-bold italic"><i class="fa fa-address-book color-mainblue"></i> Family Group</h1>
+  
+</div>
+<div class="row">
+  
+    <div class="col-sm-3"  *ngIf="loggedUser.isParent">
+        <button type="button"class="btn btn-sm btn-primary bgcolor-blue2" (click)="showAddModal()">Add Member</button>                
+    </div>  
+    
+</div>
+<div><br></div>
+<div class="row">
+  <div class="container">
+    <div class="card-deck">      
+      <famgroup-item *ngFor="let member of membersList" [userProfile]="member" [groupOwner]="groupOwner"></famgroup-item>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modals for CRUD operations -->
+<!-- New -->
+<ng-template #newRowModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Add Family Member</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="this.newModalDialog.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <signup-profile class="" [refreshCallback]="refreshCallback" [isFromParent]="true"  [modalDialog]="newModalDialog"></signup-profile>
+</ng-template>
+

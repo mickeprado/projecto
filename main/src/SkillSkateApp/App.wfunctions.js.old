@@ -1,0 +1,59 @@
+import React, {Component} from 'react';
+import {  
+    StyleSheet, 
+    Text, 
+    View, 
+    Button  
+} from 'react-native';
+
+import * as awsService from './lib/Aws/aws.services';
+
+const data = {
+    tresponse : ''
+};
+
+
+export default class App extends Component {
+
+    constructor(props){
+        super(props);
+        this.handlerResponse = this.processResponse.bind(this);
+        console.log(awsService);
+    }
+
+    signSample(){
+        
+        awsService.signInUser('pepe', '2Password!', null, this.handlerResponse);
+    }
+    
+    processResponse(user){
+      console.log(user);
+      if(user){
+          data.tresponse = JSON.stringify(user);
+
+      }else{
+          data.tresponse = "Error authenticating the user"
+      }
+  
+    }
+
+    render() {
+        return (
+          <View style={styles.container}>
+            <Text>This sample call to AWS sign lambda</Text>
+            <Button onPress={this.signSample} title="Call AWS" />
+            <Text>{data.tresponse}</Text>
+          </View>
+        );
+    }
+}
+    
+const styles = StyleSheet.create({
+    
+    container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    },
+});

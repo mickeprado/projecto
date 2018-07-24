@@ -1,0 +1,17 @@
+{  
+  "expo": {
+    "slug":"",
+    "privacy":"public",
+    "sdkVersion": "27.0.0",
+    "version":"0.0.1",
+    "platforms":["ios", "android"],
+    "icon":"./assets/images/SkillSkate.png",
+    "splash": {
+      "backgroundColor": "#235b87",
+      "resizeMode": "contain",
+      "image": "./assets/images/SkillSkateLogo.png"
+    }
+  },
+  "name":"mad-skills-app",
+  "displayName":"Mad Skills Sport App"
+}

@@ -1,0 +1,18 @@
+<nav class="col-2  d-done d-md-block sidebar bgcolor-bluemenu">
+  <div class="sidebar-sticky">
+    <ul class="nav flex-column">
+      <li [ngClass]="{'active': activeRoute(urlSession)}"> 
+        <a [routerLink]="urlSession" class="nav-link size14"><img src="../../../assets/images/Sessions.png" class="icon" /> <span class="nav-label">Sessions</span><span class="fa arrow"></span></a>
+      </li>
+      <li [ngClass]="{'active': activeRoute(urlFamilyGroup)}" *ngIf="isParent()">
+        <a [routerLink]="urlFamilyGroup" class="nav-link size14"><img src="../../../assets/images/Familygroup.png" class="icon" /> <span class="nav-label">Family Group</span></a>
+      </li>
+      <li [ngClass]="{'active': activeRoute(urlPerformance)}">
+        <a [routerLink]="urlPerformance" class="nav-link size14"><img src="../../../assets/images/Performance.png" class="icon" /> <span class="nav-label">Performance</span></a>
+      </li>
+      <li [ngClass]="{'active': activeRoute(urlActivities)}">
+        <a [routerLink]="urlActivities" class="nav-link size14"><img src="../../../assets/images/Activities.png" class="icon" /> <span class="nav-label">Activities</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>

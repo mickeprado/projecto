@@ -1,0 +1,16 @@
+<ActionBar title="Signin" class="action-bar"></ActionBar>
+<FlexboxLayout  background="#FF303F9F" flexDirection="column" class="form backgrand" alignItems="center" justifyContent="center" >
+<Image width="300" alt="Skill Skate Logo" src="~/assets/images/SkillSkateLogo.png" class="logomine"></Image>
+<Label text="Login" textWrap="true" class="h1 textmine"></Label>
+<TextField class="TextFieldSing" hint="User/Email"  Type="textEmailAddress"></TextField>
+<TextField class="TextFieldSing" hint="Password" Type="Password"></TextField>
+<GridLayout rows="auto auto" columns="* *" class="m-5">
+<Label class="h3 m-15" text="Family group member"  row="0" col="0"  ></Label>
+<Switch class="m-15" checked="false" (checkedChange)="goToFa()" row="0" col="1"></Switch>
+</GridLayout>
+<button text="Submit" class="btn-primary" ></button>
+<FlexboxLayout orientation="horizontal" >
+<button text="Forgot Password" class="btn-primary extabtn" ></button>
+<button text="Want signup" class="btn-primary extabtn"></button>
+</FlexboxLayout>
+</FlexboxLayout>

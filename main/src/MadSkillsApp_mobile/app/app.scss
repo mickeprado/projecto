@@ -1,0 +1,55 @@
+/*
+In NativeScript, the app.css file is where you place CSS rules that
+you would like to apply to your entire application. Check out
+http://docs.nativescript.org/ui/styling for a full list of the CSS
+selectors and properties you can use to style UI components.
+
+/*
+In many cases you may want to use the NativeScript core theme instead
+of writing your own CSS rules. For a full list of class names in the theme
+refer to http://docs.nativescript.org/ui/theme.
+*/
+@import '~nativescript-theme-core/scss/ruby';
+$btn-color: #4a97d2;
+$ab-background: #235b87;
+
+@import '~nativescript-theme-core/scss/index';
+.backgrand{
+    background-image: -webkit-linear-gradient(270deg, #235b87, #235b87);
+    background-image: linear-gradient(180deg, #235b87, #235b87);
+}
+
+.btn-flat{
+    border-width: 1;
+    
+}
+.logomine{
+    margin: 100px;
+}
+.textmine{
+text-align: center;
+color: wheat;
+}
+.logoperonal{
+   margin-top: 100dp;
+}
+.form{
+    padding: 1em;
+    *{
+       width: 80%; 
+    }
+    
+}
+.TextFieldSing{
+    border-radius: 6dp;
+    width: 80%;
+    height: 38dp;
+    background-color: white;
+    font-size: 14dp;
+    margin: 1%;
+    
+ }
+ .extabtn{
+    font-size : 8dp;
+    height: 40dp;
+ }

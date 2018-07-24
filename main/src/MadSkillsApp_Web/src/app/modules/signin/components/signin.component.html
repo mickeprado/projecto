@@ -1,0 +1,45 @@
+<div class="form_content" >  
+  <img class="mb-4" src="../../../assets/images/logos_SS.png" alt="" height="72">
+  <h1 class="font-rubick size22 italic">Please sign in</h1>
+
+  <div class="form-group" [ngClass]="{ 'has-error': submitted && !username.valid }" *ngIf="!userModel.isfamilygroup">
+    <input type="email" class="form-control" [(ngModel)]="userModel.username" #username="ngModel" required placeholder="Enter email">
+    <div *ngIf="submitted && !username.valid" class="help-block">Please let us know your email</div>
+  </div>
+  <div class="form-group" [ngClass]="{ 'has-error': submitted && !username.valid }" *ngIf="userModel.isfamilygroup">
+    <input type="text" class="form-control" [(ngModel)]="userModel.username" #username="ngModel" required placeholder="Enter userName">
+    <div *ngIf="submitted && !username.valid" class="help-block">Please let us know your family member user name </div>
+  </div>
+
+  <div class="form-group" [ngClass]="{ 'has-error': submitted && !password.valid }">
+    <input type="password" class="form-control" placeholder="Password" [(ngModel)]="userModel.password" #password="ngModel">
+    <div *ngIf="submitted && !password.valid" class="help-block">Password is requered</div>
+  </div>
+
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" [(ngModel)]="userModel.isfamilygroup" #isfamilygroup="ngModel">
+    <label class="form-check-label" for="exampleCheck1"> I'm a family group member</label>
+  </div>
+
+  <div class="form-group" *ngIf="userModel.isfamilygroup">
+    <input type="text" class="form-control" placeholder="Family Code" [(ngModel)]="userModel.familyGroupCode" #familyGroupCode="ngModel">
+  </div>
+
+  <button class="btn btn-lg btn-primary btn-block bgcolor-blue2" type="submit" (click)="signIn()">Sign in</button>
+  <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+  <br />
+  <div class="alert alert-danger" [hidden]="this.errorMessage == ''">
+    Error found: {{this.errorMessage}}
+  </div>
+
+  <div class="form-group row">
+
+    <div class="col-6">
+      <a [routerLink] ="urlForgot" class="color-white underline size14">Forgot my password</a>
+    </div>
+    <div class="col-6">
+      <a [routerLink] ="urlSignup" class="color-white underline size14">Want to sign up</a>
+    </div>
+  </div>
+</div>

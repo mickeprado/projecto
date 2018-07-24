@@ -1,0 +1,3 @@
+rootProject.name = 'mad-skills-app'
+
+include ':app'

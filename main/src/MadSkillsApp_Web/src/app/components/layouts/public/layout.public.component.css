@@ -1,0 +1,80 @@
+
+.font-rubik {
+  font-family: 'Rubik', sans-serif;
+}
+
+.font-cabin {
+  font-family: 'Cabin', sans-serif;
+}
+
+.font-fira {
+  font-family: 'Fira Sans', sans-serif;
+}
+
+.font-franklin {
+  font-family: 'Libre Franklin', sans-serif;
+}
+
+.font-sans {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.size22 {
+  font-size: 22px;
+}
+
+.size14 {
+  font-size: 14px;
+}
+
+.opacity50 {
+  opacity: 0.5;
+}
+
+.bgcolor-mainblue {
+  background-color: #235b87;
+}
+
+.bgcolor-blue {
+  background-color: #4a97d2;
+}
+
+.bgcolor-blue2 {
+  background-color: #29abe2;
+}
+
+.bgcolor-wite {
+  background-color: #fff;
+}
+
+.bgcolor-gray {
+  background-color: #e6e6e6;
+}
+
+.bgcolor-maingray {
+  background-color: #f2f2f2;
+}
+
+.color-mainblue {
+  color: #235b87;
+}
+
+.color-blue {
+  color: #4a97d2;
+}
+
+.color-blue2 {
+  color: #29abe2;
+}
+
+.color-wite {
+  color: #fff;
+}
+
+.color-gray {
+  color: #e6e6e6;
+}
+
+.color-maingray {
+  color: #f2f2f2;
+}

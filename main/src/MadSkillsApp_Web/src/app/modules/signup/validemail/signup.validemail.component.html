@@ -1,0 +1,30 @@
+<div class="form_content">
+  <img class="mb-4" src="../../../assets/images/logos_SS.png" alt="" height="72">
+  <h1 class="font-rubick size22 italic">Email Verification</h1>
+  <h4 class="font-fira size14">A Verification code has been sent to your email address:</h4>
+  <h2 class="font-fira color-blue size22"><label >{{signUpModel.userName}}</label></h2>
+
+  <div class="form-group" >
+    <input type="text" class="form-control" [(ngModel)]="signUpModel.emailCode" #emailCode="ngModel" required placeholder="Verification code">
+    <div *ngIf="submitted && !emailCode.valid" class="help-block">Type te code we sent to the email you provided</div>
+  </div>
+
+  <button class="btn btn-lg btn-primary btn-block bgcolor-blue" type="submit" (click)="validateCode()" [disabled]="(signUpModel.emailCode.trim().length == 0) ">Submit</button>
+  <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+  <br />
+  <div class="alert alert-danger" [hidden]="this.errorMessage == ''">
+    Error found: {{this.errorMessage}}
+  </div>
+
+  <div class="form-group row">
+
+    <div class="col-6">
+      <a href="#" class="color-white underline size14" (click)="!!sendCodeAgain()" >Send me the code again</a>
+    </div>
+    <div class="col-6">
+      <a [routerLink]="urlSignup" class="color-white underline size14">Go back</a>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,160 @@
+<div class="form_content" *ngIf="isFromParent==false || this.isFromParent == undefined">
+  <img class="mb-4" src="../../../assets/images/logos_SS.png" alt="" height="72">
+  <h1 class="font-rubick size22 italic">Profile Information</h1>
+  <h1 class="font-fira color-blue size22"><label >{{signUpModel.userName}}</label></h1>
+  <h1 class="font-fira size14">We require a bit of information to get started</h1>
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <select class="form-control custom-select mr-sm-2" [(ngModel)]="selectedYearId" (ngModelChange)="loadDaysInMonth()">
+        <option class="form-control" *ngFor="let year of yearList" [value]="year.key">{{year.value}}</option>
+      </select>
+    </div>
+    <div class="form-group col-4">
+      <select class="form-control custom-select mr-sm-2" [(ngModel)]="selectedMonthId" (ngModelChange)="loadDaysInMonth()">
+        <option class="form-control" *ngFor="let month of monthList" [value]="month.key">{{month.value}}</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-4">
+      <select class="form-control custom-select mr-sm-2" [(ngModel)]="selectedDayId" (ngModelChange)="calculateAge()" >
+        <option class="form-control" *ngFor="let day of dayList" [value]="day.key">{{day.value}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div *ngIf="age>=16">
+    <div class="form-group">
+      <input type="text" class="form-control" [(ngModel)]="profile.firstName" #firstName="ngModel" required placeholder="First name">
+      <div *ngIf="submitted && !firstName.valid" class="help-block">Please let me know your first name</div>
+    </div>
+  
+    <div class="form-group">
+      <input type="text" class="form-control" [(ngModel)]="profile.lastName" #lastName="ngModel" required placeholder="Last name">
+      <div *ngIf="submitted && !lastName.valid" class="help-block">Please let me know your last name</div>
+    </div>
+  
+    <div class="form-group">
+      <input type="text" class="form-control" [(ngModel)]="profile.alias" #alias="ngModel" required placeholder="User name / nickname">
+      <div *ngIf="submitted && !alias.valid" class="help-block">Please let me know your nickname </div>
+    </div>
+  
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" [(ngModel)]="isCoach">
+      <label class="form-check-label">Coach</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" [(ngModel)]="isPlayer">
+      <label class="form-check-label">Player</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" [(ngModel)]="isParent">
+      <label class="form-check-label">Parent</label>
+    </div>
+  
+    <div class="form-group">
+      <select class="form-control" [(ngModel)]="selectedSkillLevelId" >
+          <option class="form-control" *ngFor="let level of skillLevelList" [value]="level.SkillLevelId">{{level.Name}}</option>      
+      </select>
+    </div>
+  
+    <button class="btn btn-lg btn-primary btn-block bgcolor-blue2" type="submit" (click)="signUp()" [disabled]="(profile.firstName.trim().length == 0) || (profile.lastName.trim().length == 0) || (profile.alias.trim().length == 0) || (!isCoach && !isParent && !isPlayer) || (selectedSkillLevelId == -1)">Submit</button>
+  </div>
+  <div *ngIf="age > -1 && age <16">
+    <p>
+      Please notify your parent or tutor to sign you up.
+    </p>
+  </div>
+
+  <br />
+  <div class="alert alert-danger" [hidden]="this.errorMessage == ''">
+    Error found: {{this.errorMessage}}
+  </div>
+  
+  <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+</div>
+
+
+<div class="modal-body" *ngIf="isFromParent==true">  
+   <div class="form-row">
+    <div class="form-group col-md-4">
+      <select class="form-control custom-select mr-sm-2" [(ngModel)]="selectedYearId" (ngModelChange)="loadDaysInMonth()">
+        <option class="form-control" *ngFor="let year of yearList" [value]="year.key">{{year.value}}</option>
+      </select>
+    </div>
+    <div class="form-group col-4">
+      <select class="form-control custom-select mr-sm-2" [(ngModel)]="selectedMonthId" (ngModelChange)="loadDaysInMonth()">
+        <option class="form-control" *ngFor="let month of monthList" [value]="month.key">{{month.value}}</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-4">
+      <select class="form-control custom-select mr-sm-2" [(ngModel)]="selectedDayId" (ngModelChange)="calculateAge()" >
+        <option class="form-control" *ngFor="let day of dayList" [value]="day.key">{{day.value}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div >
+    <div class="form-group">
+      <input type="text" class="form-control" [(ngModel)]="profile.firstName" #firstName="ngModel" required placeholder="First name">
+      <div *ngIf="submitted && !firstName.valid" class="help-block">Please let me know your first name</div>
+    </div>
+  
+    <div class="form-group">
+      <input type="text" class="form-control" [(ngModel)]="profile.lastName" #lastName="ngModel" required placeholder="Last name">
+      <div *ngIf="submitted && !lastName.valid" class="help-block">Please let me know your last name</div>
+    </div>
+  
+    <div class="form-group">
+      <input type="text" class="form-control" [(ngModel)]="profile.alias" #alias="ngModel" required placeholder="User name / nickname">
+      <div *ngIf="submitted && !alias.valid" class="help-block">Please let me know your nickname </div>
+    </div>
+      
+    <div class="form-group">
+      <input type="email" class="form-control" [(ngModel)]="profile.email" #email="ngModel" placeholder="Email">
+      <div *ngIf="submitted && !email.valid" class="help-block">Please let me know your email </div>
+    </div>
+
+    <div class="form-group" [ngClass]="{ 'has-error': submitted && !userName.valid }">
+      <input type="text" class="form-control"  [(ngModel)]="signUpModel.userName" #userName="ngModel" required placeholder="Enter User Name">
+      <div *ngIf="submitted && !userName.valid" class="help-block">Please let us know your username</div>
+    </div>
+  
+    <div class="form-group" [ngClass]="{ 'has-error': submitted && !password.valid }">
+      <input type="password" class="form-control" placeholder="Password" [(ngModel)]="signUpModel.password" #password="ngModel">
+      <div *ngIf="submitted && !password.valid" class="help-block">Password is requered</div>
+    </div>
+  
+    <div class="form-group" [ngClass]="{ 'has-error': submitted && !password.valid }">
+      <input type="password" class="form-control"   placeholder="Password Confirmation" [(ngModel)]="signUpModel.passwordConfirmation" #passwordConfirmation="ngModel">
+      <div *ngIf="signUpModel.passwordConfirmation != signUpModel.password" class="help-block">Password and confirmation does not match</div>
+    </div>
+
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" [(ngModel)]="isPlayer">
+      <label class="form-check-label">Player</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" [(ngModel)]="isParent">
+      <label class="form-check-label">Parent</label>
+    </div>
+  
+    <div class="form-group">
+      <select class="form-control" [(ngModel)]="selectedSkillLevelId" >
+          <option class="form-control" *ngFor="let level of skillLevelList" [value]="level.SkillLevelId">{{level.Name}}</option>      
+      </select>
+    </div>
+  
+    <button class="btn btn-lg btn-primary btn-block bgcolor-blue2" type="submit" (click)="signUp()" [disabled]="(signUpModel.userName.trim().length == 0) || (signUpModel.password != signUpModel.passwordConfirmation) ||  (signUpModel.password.trim().length == 0) ||  (signUpModel.passwordConfirmation.trim().length == 0) || (profile.firstName.trim().length == 0) || (profile.lastName.trim().length == 0) || (profile.alias.trim().length == 0) || (!isParent && !isPlayer) || (selectedSkillLevelId == -1)">Submit</button>
+  </div>  
+
+  <br />
+  <div class="alert alert-danger" [hidden]="this.errorMessage == ''">
+    Error found: {{this.errorMessage}}
+  </div>
+  
+  <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+</div>

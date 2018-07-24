@@ -1,0 +1,35 @@
+<div class="form_content">
+  <img class="mb-4" src="../../../assets/images/logos_SS.png" alt="" height="72">
+  <h1 class="font-rubick size22 italic">Sign Up</h1>
+
+  <div class="form-group" [ngClass]="{ 'has-error': submitted && !userName.valid }">
+    <input type="email" class="form-control"  [(ngModel)]="signUpModel.userName" #userName="ngModel" required placeholder="Enter email">
+    <div *ngIf="submitted && !userName.valid" class="help-block">Please let us know your email</div>
+  </div>
+
+  <div class="form-group" [ngClass]="{ 'has-error': submitted && !password.valid }">
+    <input type="password" class="form-control" placeholder="Password" [(ngModel)]="signUpModel.password" #password="ngModel">
+    <div *ngIf="submitted && !password.valid" class="help-block">Password is requered</div>
+  </div>
+
+  <div class="form-group" [ngClass]="{ 'has-error': submitted && !password.valid }">
+    <input type="password" class="form-control"   placeholder="Password Confirmation" [(ngModel)]="signUpModel.passwordConfirmation" #passwordConfirmation="ngModel">
+    <div *ngIf="signUpModel.passwordConfirmation != signUpModel.password" class="help-block">Password and confirmation does not match</div>
+  </div>
+
+  <button class="btn btn-lg btn-primary btn-block bgcolor-blue2" type="submit" (click)="signUp()" [disabled]="(signUpModel.userName.trim().length == 0) || (signUpModel.password != signUpModel.passwordConfirmation) ||  (signUpModel.password.trim().length == 0) ||  (signUpModel.passwordConfirmation.trim().length == 0)">Submit</button>
+  <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+  <br />
+  <div class="alert alert-danger" [hidden]="this.errorMessage == ''">
+    Error found: {{this.errorMessage}}
+  </div>
+
+  <div class="form-group row">
+
+    <div class="col-12">
+      <a [routerLink]="urlSignin"  class="color-white underline size14">Want to Sign in</a>
+    </div>
+  </div>
+
+</div>

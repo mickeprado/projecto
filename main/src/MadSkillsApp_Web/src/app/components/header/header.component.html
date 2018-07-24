@@ -1,0 +1,14 @@
+
+<nav class="navbar sticky-top bgcolor-mainblue flex-md-nowrap p-0 font-fira size14">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0"><img class="ml-2" src="../../../assets/images/logos_SS.png" alt="" height="36"></a>
+  
+  <ul class="navbar-nav top-menu ml-2">
+    <li class="nav-item"><a class="nav-link font-fira" (click)="editProfile()">
+      {{userName}} &nbsp;&nbsp;
+      <img src={{pictureSource}} class="userPicture" onerror="this.src='../../../assets/images/NoImage.png'"/></a>
+    </li>
+    <notif-icon></notif-icon>
+    <li class="nav-item"><a class="nav-link font-fira"  (click)="signOut()"><i class="fa fa-sign-out" (click)="signOut()"></i>Sign out</a></li>
+    <!--<input class="nav-link font-fira btn"><i class="fa fa-sign-out" (click)="signOut()"></i>Sign out</input></li>-->
+  </ul>
+</nav>
